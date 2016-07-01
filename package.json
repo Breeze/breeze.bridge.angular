@@ -1,0 +1,28 @@
+{
+  "name": "breeze-bridge-angular2",
+  "version": "1.0.0",
+  "description": "A bridge that configures Breeze and Angular2 to work together.",
+  "main": "breeze-bridge-angular2.js",
+  "scripts": {
+    "typings": "typings",
+    "postinstall": "typings install"
+  },
+  "keywords": [
+    "breeze",
+    "angular2",
+    "bridge"
+  ],
+  "author": "Marcel Good",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/core": "^2.0.0-rc.4",
+    "@angular/http": "^2.0.0-rc.4",
+    "breeze-client": "^1.5.7",
+    "rxjs": "^5.0.0-beta.9"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-changed": "^1.3.0",
+    "gulp-shell": "^0.5.2"
+  }
+}
