@@ -3,6 +3,7 @@
 var gulp    = require('gulp');
 var changed = require('gulp-changed');
 var shell = require('gulp-shell');
+var rename = require('gulp-rename');
 
 // var eventStream = require('event-stream');
 
@@ -17,7 +18,11 @@ gulp.task('buildTypescript',
 );
 
 gulp.task('moveFiles', ['buildTypescript'], function() {
-  return gulp.src( mapPath(srcDir, ['*.js', '*.d.ts']))
+  return gulp.src( mapPath(srcDir, ['breeze-bridge-angular2.js', 'breeze-bridge-angular2.d.ts']))
+    .pipe(rename(function(path) {
+      var name = path.basename;
+      path.basename = 'index' + (name.indexOf('.') < 0 ? '' : name.substring(name.indexOf('.')));
+    }))
     .pipe(changed('..'))
     .pipe(gulp.dest('..'))
 })
