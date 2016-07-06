@@ -28,7 +28,7 @@ Running the example:
 
 To use the bridge in your own application, the following steps are required.
 
-Configure breeze-client and breeze-bridge-angular2 in `systemjs.config.js`.
+Configure `breeze-client` and `breeze-bridge-angular2` in `systemjs.config.js`.
 
 ```
   // map tells the System loader where to look for things
@@ -66,23 +66,36 @@ export class AppComponent { }
 One-time inject `BreezeBridgeAngular2` and start using Breeze. The act of injecting the bridge causes the system to self-configure. The only requirement is that the bridge needs to be injected once before the first call to Breeze.
 
 ```
-import { Customer } from './entities';
 import { BreezeBridgeAngular2 } from 'breeze-bridge-angular2';
-import { EntityManager, EntityQuery } from 'breeze-client';
 
 @Component({...
 })
 export class AppComponent {
+  constructor(bridge: BreezeBridgeAngular2) {  } // configure once by injecting bridge - no need to use it here
+}
+```
+```
+import { Injectable } from '@angular/core';
+import { EntityManager, EntityQuery } from 'breeze-client';
+import { Customer } from './entities';
+
+@Injectable()
+export class DataService {
+
   private _em: EntityManager;
-  customers: Customer[];
 
-  constructor(bridge: BreezeBridgeAngular2) {
-
+  constructor() {
     this._em = new EntityManager();
+  }
 
-    let query = EntityQuery.from("Customers").orderBy('companyName');
-    this._em.executeQuery(query).then(result => {
-        this.customers = <Customer[]>result.results;
+  getAllCustomers(): Promise<Customer[]> {
+    let query = EntityQuery.from('Customers').orderBy('companyName');
+
+    return <Promise<Customer[]>><any> this._em.executeQuery(query)
+    .then(res => res.results)
+    .catch((error) => {
+      console.log(error);
+      return Promise.reject(error);
     });
   }
 }

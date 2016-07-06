@@ -10,8 +10,7 @@ export class BreezeBridgeAngular2 {
   constructor(public http: Http) {
     // Configure Breeze for Angular ... exactly once.
     // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
-    // 'backingStore' is the Breeze default when it detects that KnockoutJS is absent
-    // but we set it here to be explicit.
+    // 'backingStore' is the Breeze default but we set it here to be explicit.
     config.initializeAdapterInstance('modelLibrary', 'backingStore', true);
     config.setQ(<promises.IPromiseService> Q);
     config.registerAdapter('ajax', () => new AjaxAngular2Adapter(http));
