@@ -205,12 +205,18 @@ class AjaxAngular2Adapter {
       return Promise.resolve(httpResponse);
     }
 
-    function errorFn(arg: {data: any, response: Response} | Error) {
+    function errorFn(arg: {data: any, response: Response} | Error | Response) {
       if (arg instanceof Error) {
         return Promise.reject(arg); // program error; nothing we can do
       } else {
-        let data = arg.data;
-        let response = arg.response;
+        var data: any;
+        var response: Response;
+        if (arg instanceof Response) {
+          response = arg;
+        } else {
+          data = arg.data;
+          response = arg.response;
+        }
 
         // Timeout appears as an error with status===0 and no data.
         if (response.status === 0 && data == null) {
@@ -226,8 +232,12 @@ class AjaxAngular2Adapter {
           statusText: response.statusText,
           response: response
         };
-        config.error(httpResponse);
-        return Promise.reject(httpResponse);
+        httpResponse["error"] = response.status + ": " + response.statusText;  // breeze looks at the error property
+
+        config.error(httpResponse); // send error to breeze error handler
+        var err = new Error(httpResponse["error"]);
+        err["httpResponse"] = httpResponse;
+        return Promise.reject(err); // send error back through the zone
       }
     }
   };

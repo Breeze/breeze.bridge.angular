@@ -18,8 +18,7 @@ var BreezeBridgeAngular2 = (function () {
         this.http = http;
         // Configure Breeze for Angular ... exactly once.
         // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
-        // 'backingStore' is the Breeze default when it detects that KnockoutJS is absent
-        // but we set it here to be explicit.
+        // 'backingStore' is the Breeze default but we set it here to be explicit.
         breeze_client_1.config.initializeAdapterInstance('modelLibrary', 'backingStore', true);
         breeze_client_1.config.setQ(Q);
         breeze_client_1.config.registerAdapter('ajax', function () { return new AjaxAngular2Adapter(http); });
@@ -168,8 +167,15 @@ var AjaxAngular2Adapter = (function () {
                 return Promise.reject(arg); // program error; nothing we can do
             }
             else {
-                var data = arg.data;
-                var response = arg.response;
+                var data;
+                var response;
+                if (arg instanceof http_1.Response) {
+                    response = arg;
+                }
+                else {
+                    data = arg.data;
+                    response = arg.response;
+                }
                 // Timeout appears as an error with status===0 and no data.
                 if (response.status === 0 && data == null) {
                     data = 'timeout';
@@ -183,8 +189,11 @@ var AjaxAngular2Adapter = (function () {
                     statusText: response.statusText,
                     response: response
                 };
-                config.error(httpResponse);
-                return Promise.reject(httpResponse);
+                httpResponse["error"] = response.status + ": " + response.statusText; // breeze looks at the error property
+                config.error(httpResponse); // send error to breeze error handler
+                var err = new Error(httpResponse["error"]);
+                err["httpResponse"] = httpResponse;
+                return Promise.reject(err); // send error back through the zone
             }
         }
     };
