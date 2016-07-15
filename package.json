@@ -1,6 +1,6 @@
 {
   "name": "breeze-bridge-angular2",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A bridge that configures Breeze and Angular2 to work together.",
   "main": "breeze-bridge-angular2.js",
   "scripts": {
@@ -17,7 +17,7 @@
   "dependencies": {
     "@angular/core": "^2.0.0-rc.4",
     "@angular/http": "^2.0.0-rc.4",
-    "breeze-client": "^1.5.8",
+    "breeze-client": "^1.5.9",
     "rxjs": "^5.0.0-beta.6"
   },
   "devDependencies": {

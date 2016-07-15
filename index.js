@@ -25,7 +25,7 @@ var BreezeBridgeAngular2 = (function () {
         breeze_client_1.config.initializeAdapterInstance('ajax', AjaxAngular2Adapter.adapterName, true);
     }
     BreezeBridgeAngular2 = __decorate([
-        core_1.Injectable(),
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
     ], BreezeBridgeAngular2);
     return BreezeBridgeAngular2;
