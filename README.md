@@ -2,10 +2,17 @@
 
 A bridge that configures Breeze to work with Angular 2 out of the box.
 
+# Change Log #
+
+## 0.3.0 August 24, 2016 ##
+
+### Breaking changes ###
+- The Breeze Angular2 bridge is no longer an injectable service. It has been changed to an NgModule
+
 # Prerequisites #
 
-- Breeze client npm package 1.5.8 or higher
-- Angular 2.0.0 RC4 or higher
+- Breeze client npm package 1.5.11 or higher
+- Angular 2.0.0 RC5 or higher
 
 # Installation #
 
@@ -46,34 +53,24 @@ Configure `breeze-client` and `breeze-bridge-angular2` in `systemjs.config.js`.
   };
 ```
 
-Import `HTTP_PROVIDERS` and `BreezeBridgeAngular2` and add them to the app component's providers list.
+Import `BreezeBridgeAngular2Module` and add them to the app module's imports.
 
 ```
-import { HTTP_PROVIDERS } from '@angular/http';
-import { BreezeBridgeAngular2 } from 'breeze-bridge-angular2';
+import { BreezeBridgeAngular2Module } from 'breeze-bridge-angular2';
 ```
 
 ```
-@Component({
-  providers: [
-    BreezeBridgeAngular2,
-    HTTP_PROVIDERS,
-  ]
+@NgModule({
+    imports: [
+        BreezeBridgeAngular2Module
+    ],
+    bootstrap: [ AppComponent ]
 })
-export class AppComponent { }
+export class AppModule { }
 ```
 
-One-time inject `BreezeBridgeAngular2` and start using Breeze. The act of injecting the bridge causes the system to self-configure. The only requirement is that the bridge needs to be injected once before the first call to Breeze.
+Now we can use Breeze normally from something like a data service for example.
 
-```
-import { BreezeBridgeAngular2 } from 'breeze-bridge-angular2';
-
-@Component({...
-})
-export class AppComponent {
-  constructor(bridge: BreezeBridgeAngular2) {  } // configure once by injecting bridge - no need to use it here
-}
-```
 ```
 import { Injectable } from '@angular/core';
 import { EntityManager, EntityQuery } from 'breeze-client';
