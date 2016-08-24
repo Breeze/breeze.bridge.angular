@@ -13,8 +13,8 @@ var http_1 = require('@angular/http');
 var breeze_client_1 = require('breeze-client');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/toPromise');
-var BreezeBridgeAngular2 = (function () {
-    function BreezeBridgeAngular2(http) {
+var BreezeBridgeAngular2Module = (function () {
+    function BreezeBridgeAngular2Module(http) {
         this.http = http;
         // Configure Breeze for Angular ... exactly once.
         // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
@@ -24,13 +24,15 @@ var BreezeBridgeAngular2 = (function () {
         breeze_client_1.config.registerAdapter('ajax', function () { return new AjaxAngular2Adapter(http); });
         breeze_client_1.config.initializeAdapterInstance('ajax', AjaxAngular2Adapter.adapterName, true);
     }
-    BreezeBridgeAngular2 = __decorate([
-        core_1.Injectable(), 
+    BreezeBridgeAngular2Module = __decorate([
+        core_1.NgModule({
+            imports: [http_1.HttpModule]
+        }), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], BreezeBridgeAngular2);
-    return BreezeBridgeAngular2;
+    ], BreezeBridgeAngular2Module);
+    return BreezeBridgeAngular2Module;
 }());
-exports.BreezeBridgeAngular2 = BreezeBridgeAngular2;
+exports.BreezeBridgeAngular2Module = BreezeBridgeAngular2Module;
 /**
  * Minimum for breeze breeze Q/ES6 Promise adapter
  */

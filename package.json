@@ -15,9 +15,9 @@
   "author": "Marcel Good",
   "license": "ISC",
   "dependencies": {
-    "@angular/core": "^2.0.0-rc.4",
-    "@angular/http": "^2.0.0-rc.4",
-    "breeze-client": "^1.5.9",
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/http": "^2.0.0-rc.5",
+    "breeze-client": "^1.5.11",
     "rxjs": "^5.0.0-beta.6"
   },
   "devDependencies": {

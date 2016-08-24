@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Request, RequestOptions, Response } from '@angular/http';
+import { NgModule } from '@angular/core';
+import { HttpModule, Http, Headers, Request, RequestOptions, Response } from '@angular/http';
 import { core, config, promises } from 'breeze-client';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-@Injectable()
-export class BreezeBridgeAngular2 {
+@NgModule({
+  imports: [HttpModule]
+})
+export class BreezeBridgeAngular2Module {
   constructor(public http: Http) {
     // Configure Breeze for Angular ... exactly once.
     // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
