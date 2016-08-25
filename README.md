@@ -53,7 +53,7 @@ Configure `breeze-client` and `breeze-bridge-angular2` in `systemjs.config.js`.
   };
 ```
 
-Import `BreezeBridgeAngular2Module` and add them to the app module's imports.
+Import `BreezeBridgeAngular2Module` and add it to the app module's imports.
 
 ```
 import { BreezeBridgeAngular2Module } from 'breeze-bridge-angular2';
