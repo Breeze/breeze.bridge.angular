@@ -4,9 +4,9 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 # Change Log #
 
-## 0.3.0 August 24, 2016 ##
+### 0.3.0 August 24, 2016 ###
 
-### Breaking changes ###
+#### Breaking changes ####
 - The Breeze Angular2 bridge is no longer an injectable service. It has been changed to an NgModule
 
 ## 0.3.1 August 25, 2016
@@ -58,7 +58,7 @@ Configure `breeze-client` and `breeze-bridge-angular2` in `systemjs.config.js`.
   };
 ```
 
-Import `BreezeBridgeAngular2Module` and add them to the app module's imports.
+Import `BreezeBridgeAngular2Module` and add it to the app module's imports.
 
 ```
 import { BreezeBridgeAngular2Module } from 'breeze-bridge-angular2';
