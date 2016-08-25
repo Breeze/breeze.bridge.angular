@@ -4,9 +4,9 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 # Change Log #
 
-## 0.3.0 August 24, 2016 ##
+### 0.3.0 August 24, 2016 ###
 
-### Breaking changes ###
+#### Breaking changes ####
 - The Breeze Angular2 bridge is no longer an injectable service. It has been changed to an NgModule
 
 # Prerequisites #
