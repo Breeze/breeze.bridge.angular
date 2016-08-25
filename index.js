@@ -162,7 +162,6 @@ var AjaxAngular2Adapter = (function () {
                 response: response
             };
             config.success(httpResponse);
-            return Promise.resolve(httpResponse);
         }
         function errorFn(arg) {
             if (arg instanceof Error) {
@@ -193,9 +192,6 @@ var AjaxAngular2Adapter = (function () {
                 };
                 httpResponse["error"] = response.status + ": " + response.statusText; // breeze looks at the error property
                 config.error(httpResponse); // send error to breeze error handler
-                var err = new Error(httpResponse["error"]);
-                err["httpResponse"] = httpResponse;
-                return Promise.reject(err); // send error back through the zone
             }
         }
     };
