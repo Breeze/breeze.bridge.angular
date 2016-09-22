@@ -189,19 +189,19 @@ class AjaxAngular2Adapter {
       return {data, response};
     }
 
-    function successFn({data, response}) {
-      if (response.status < 200 || response.status >= 300) {
-        throw {data, response};
+    function successFn(arg: { data: any, response: Response }) {
+      if (arg.response.status < 200 || arg.response.status >= 300) {
+        throw { data: arg.data, response: arg.response};
       }
 
       let httpResponse: HttpResponse = {
         config: requestInfo.request,
-        data: data,
-        getHeaders: makeGetHeaders(response),
+        data: arg.data,
+        getHeaders: makeGetHeaders(arg.response),
         ngConfig: requestInfo.request,
-        status: response.status,
-        statusText: response.statusText,
-        response: response
+        status: arg.response.status,
+        statusText: arg.response.statusText,
+        response: arg.response
       };
       config.success(httpResponse);
     }

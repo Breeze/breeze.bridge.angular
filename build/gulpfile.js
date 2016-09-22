@@ -14,11 +14,11 @@ var buildDir = './'
 
 // build the Typescript files
 gulp.task('buildTypescript', 
-  shell.task(['tsc'], { cwd: '..' })
+  shell.task(['node_modules\\.bin\\ngc'], { cwd: '..' })
 );
 
 gulp.task('moveFiles', ['buildTypescript'], function() {
-  return gulp.src( mapPath(srcDir, ['breeze-bridge-angular2.js', 'breeze-bridge-angular2.d.ts']))
+  return gulp.src( mapPath(srcDir, ['breeze-bridge-angular2.js', 'breeze-bridge-angular2.d.ts', 'breeze-bridge-angular2.metadata.json']))
     .pipe(rename(function(path) {
       var name = path.basename;
       path.basename = 'index' + (name.indexOf('.') < 0 ? '' : name.substring(name.indexOf('.')));
