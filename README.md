@@ -22,8 +22,8 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 # Prerequisites #
 
-- Breeze client npm package 1.5.11 or higher
-- Angular 2.0.0 RC5 or higher
+- Breeze client npm package 1.5.12 or higher
+- Angular 2.0.0 or higher
 
 # Installation #
 
