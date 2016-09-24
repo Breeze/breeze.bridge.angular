@@ -37,12 +37,7 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 # Usage #
 
-A complete example demonstrating the use of the bridge can be found here: [https://github.com/Breeze/breeze.js.samples/tree/master/no-server/angular2-breeze](https://github.com/Breeze/breeze.js.samples/tree/master/no-server/angular2-breeze "Breeze-Angular2 example")
-
-Running the example:
-
-	npm install
-	npm start
+A comprehensive example app that makes use of the bridge can be found here: [https://github.com/Breeze/temphire.angular2](https://github.com/Breeze/temphire.angular2).
 
 To use the bridge in your own application, the following steps are required.
 
