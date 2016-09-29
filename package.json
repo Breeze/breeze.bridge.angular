@@ -1,12 +1,8 @@
 {
   "name": "breeze-bridge-angular2",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A bridge that configures Breeze and Angular2 to work together.",
   "main": "index.js",
-  "scripts": {
-    "typings": "typings",
-    "postinstall": "typings install"
-  },
   "keywords": [
     "breeze",
     "angular2",

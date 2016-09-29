@@ -18,32 +18,11 @@ var import5 = require('@angular/http/src/backends/xhr_backend');
 var import6 = require('@angular/http/src/base_request_options');
 var import8 = require('@angular/http/src/interfaces');
 var import9 = require('@angular/http/src/http');
-var import10 = require('@angular/core/src/i18n/tokens');
 var BreezeBridgeAngular2ModuleInjector = (function (_super) {
     __extends(BreezeBridgeAngular2ModuleInjector, _super);
     function BreezeBridgeAngular2ModuleInjector(parent) {
         _super.call(this, parent, [], []);
     }
-    Object.defineProperty(BreezeBridgeAngular2ModuleInjector.prototype, "_LOCALE_ID_8", {
-        get: function () {
-            if ((this.__LOCALE_ID_8 == null)) {
-                (this.__LOCALE_ID_8 = null);
-            }
-            return this.__LOCALE_ID_8;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(BreezeBridgeAngular2ModuleInjector.prototype, "_TRANSLATIONS_FORMAT_9", {
-        get: function () {
-            if ((this.__TRANSLATIONS_FORMAT_9 == null)) {
-                (this.__TRANSLATIONS_FORMAT_9 = null);
-            }
-            return this.__TRANSLATIONS_FORMAT_9;
-        },
-        enumerable: true,
-        configurable: true
-    });
     BreezeBridgeAngular2ModuleInjector.prototype.createInternal = function () {
         this._HttpModule_0 = new import2.HttpModule();
         this._BrowserXhr_1 = new import3.BrowserXhr();
@@ -79,12 +58,6 @@ var BreezeBridgeAngular2ModuleInjector = (function (_super) {
         }
         if ((token === import1.BreezeBridgeAngular2Module)) {
             return this._BreezeBridgeAngular2Module_7;
-        }
-        if ((token === import10.LOCALE_ID)) {
-            return this._LOCALE_ID_8;
-        }
-        if ((token === import10.TRANSLATIONS_FORMAT)) {
-            return this._TRANSLATIONS_FORMAT_9;
         }
         return notFoundResult;
     };

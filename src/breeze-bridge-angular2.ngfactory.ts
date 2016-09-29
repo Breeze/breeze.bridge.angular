@@ -14,7 +14,6 @@ import * as import6 from '@angular/http/src/base_request_options';
 import * as import7 from '@angular/core/src/di/injector';
 import * as import8 from '@angular/http/src/interfaces';
 import * as import9 from '@angular/http/src/http';
-import * as import10 from '@angular/core/src/i18n/tokens';
 class BreezeBridgeAngular2ModuleInjector extends import0.NgModuleInjector<import1.BreezeBridgeAngular2Module> {
   _HttpModule_0:import2.HttpModule;
   _BrowserXhr_1:import3.BrowserXhr;
@@ -24,18 +23,8 @@ class BreezeBridgeAngular2ModuleInjector extends import0.NgModuleInjector<import
   _RequestOptions_5:import6.BaseRequestOptions;
   _Http_6:any;
   _BreezeBridgeAngular2Module_7:import1.BreezeBridgeAngular2Module;
-  __LOCALE_ID_8:any;
-  __TRANSLATIONS_FORMAT_9:any;
   constructor(parent:import7.Injector) {
     super(parent,[],[]);
-  }
-  get _LOCALE_ID_8():any {
-    if ((this.__LOCALE_ID_8 == (null as any))) { (this.__LOCALE_ID_8 = (null as any)); }
-    return this.__LOCALE_ID_8;
-  }
-  get _TRANSLATIONS_FORMAT_9():any {
-    if ((this.__TRANSLATIONS_FORMAT_9 == (null as any))) { (this.__TRANSLATIONS_FORMAT_9 = (null as any)); }
-    return this.__TRANSLATIONS_FORMAT_9;
   }
   createInternal():import1.BreezeBridgeAngular2Module {
     this._HttpModule_0 = new import2.HttpModule();
@@ -57,8 +46,6 @@ class BreezeBridgeAngular2ModuleInjector extends import0.NgModuleInjector<import
     if ((token === import6.RequestOptions)) { return this._RequestOptions_5; }
     if ((token === import9.Http)) { return this._Http_6; }
     if ((token === import1.BreezeBridgeAngular2Module)) { return this._BreezeBridgeAngular2Module_7; }
-    if ((token === import10.LOCALE_ID)) { return this._LOCALE_ID_8; }
-    if ((token === import10.TRANSLATIONS_FORMAT)) { return this._TRANSLATIONS_FORMAT_9; }
     return notFoundResult;
   }
   destroyInternal():void {

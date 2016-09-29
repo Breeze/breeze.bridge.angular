@@ -4,6 +4,11 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 # Change Log #
 
+### 0.3.3 September 28, 2016 ###
+
+#### Fixed Bugs ####
+- Removed post install scripts from package.json
+
 ### 0.3.2 September 23, 2016 ###
 
 #### Features ####
