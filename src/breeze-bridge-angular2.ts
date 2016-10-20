@@ -214,6 +214,11 @@ class AjaxAngular2Adapter {
         var response: Response;
         if (arg instanceof Response) {
           response = arg;
+          try {
+            data = arg.json();
+          } catch(e) {
+            data = arg.text();
+          }
         } else {
           data = arg.data;
           response = arg.response;
@@ -224,6 +229,13 @@ class AjaxAngular2Adapter {
           data = 'timeout';
         }
 
+        let errorMessage = response.status + ": " + response.statusText;
+        if (data && typeof data === 'object') {
+          data["message"] = data["message"] || errorMessage;  // breeze looks at the message property
+        }
+        if (!data) {
+          data = errorMessage;   // Return the error message as data
+        }
         let httpResponse: HttpResponse = {
           config: requestInfo.request,
           data: data,
@@ -233,7 +245,6 @@ class AjaxAngular2Adapter {
           statusText: response.statusText,
           response: response
         };
-        httpResponse["error"] = response.status + ": " + response.statusText;  // breeze looks at the error property
 
         config.error(httpResponse); // send error to breeze error handler
       }

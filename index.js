@@ -165,6 +165,12 @@ var AjaxAngular2Adapter = (function () {
                 var response;
                 if (arg instanceof http_1.Response) {
                     response = arg;
+                    try {
+                        data = arg.json();
+                    }
+                    catch (e) {
+                        data = arg.text();
+                    }
                 }
                 else {
                     data = arg.data;
@@ -173,6 +179,13 @@ var AjaxAngular2Adapter = (function () {
                 // Timeout appears as an error with status===0 and no data.
                 if (response.status === 0 && data == null) {
                     data = 'timeout';
+                }
+                var errorMessage = response.status + ": " + response.statusText;
+                if (data && typeof data === 'object') {
+                    data["message"] = data["message"] || errorMessage; // breeze looks at the message property
+                }
+                if (!data) {
+                    data = errorMessage; // Return the error message as data
                 }
                 var httpResponse = {
                     config: requestInfo.request,
@@ -183,7 +196,6 @@ var AjaxAngular2Adapter = (function () {
                     statusText: response.statusText,
                     response: response
                 };
-                httpResponse["error"] = response.status + ": " + response.statusText; // breeze looks at the error property
                 config.error(httpResponse); // send error to breeze error handler
             }
         }

@@ -4,6 +4,11 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 # Change Log #
 
+### 0.3.4 October 20, 2016 ###
+
+#### Fixed Bugs ####
+- Fix error response payload not being passed up
+
 ### 0.3.3 September 28, 2016 ###
 
 #### Fixed Bugs ####
