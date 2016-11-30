@@ -92,7 +92,7 @@ interface DsaConfig {
 }
 
 ////////////////////
-class AjaxAngular2Adapter {
+export class AjaxAngular2Adapter {
   static adapterName = 'angular2';
   name = AjaxAngular2Adapter.adapterName;
   defaultSettings = {};
