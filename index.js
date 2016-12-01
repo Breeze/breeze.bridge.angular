@@ -204,6 +204,7 @@ var AjaxAngular2Adapter = (function () {
     AjaxAngular2Adapter.adapterName = 'angular2';
     return AjaxAngular2Adapter;
 }());
+exports.AjaxAngular2Adapter = AjaxAngular2Adapter;
 ///// Helpers ////
 function encodeParams(obj) {
     var query = '';
