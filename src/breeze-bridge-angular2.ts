@@ -65,7 +65,7 @@ var Q = {
 /**
  * Ajax http response abstraction expected by Breeze DataServiceAdapter
  */
-interface HttpResponse {
+export interface HttpResponse {
   config: {};
   data: any;
   getHeaders: (headerName?: string) => string[];
@@ -78,7 +78,7 @@ interface HttpResponse {
 /**
  * DataServiceAdapter Ajax request configuration\
  */
-interface DsaConfig {
+export interface DsaConfig {
   url: string;
   type?: string;
   dataType?: string;

@@ -4,6 +4,11 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 # Change Log #
 
+### 0.3.5 December 1, 2016 ###
+
+#### Features ####
+- Export AjaxAngular2Adapter class, [making it easier to add auth headers](https://github.com/Breeze/breeze.js/issues/173#issuecomment-263797223).
+
 ### 0.3.4 October 20, 2016 ###
 
 #### Fixed Bugs ####
