@@ -130,7 +130,7 @@ export class AjaxAngular2Adapter {
 
     let headers = new Headers(config.headers || {});
     if (!headers.has('Content-Type')) {
-      if (config.contentType !== false) {
+      if (config.type != 'GET' && config.type != 'DELETE' && config.contentType !== false) {
         headers.set('Content-Type',
          <string> config.contentType || 'application/json; charset=utf-8');
       }
