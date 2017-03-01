@@ -1,8 +1,15 @@
-# Welcome to the Breeze-Angular2 bridge #
+# Welcome to the Breeze-Angular bridge #
 
-A bridge that configures Breeze to work with Angular 2 out of the box.
+A bridge that configures Breeze to work with Angular out of the box.
 
 # Change Log #
+
+### 2.4.1 March 1, 2017 ###
+
+#### Breaking Changes ####
+- Renamed package to `breeze-bridge-angular` and synchronzied major/minor version with Angular
+- Renamed `BreezeBridgeAngular2Module` to `BreezeBridgeAngularModule`
+- Renamed `AjaxAngular2Adapter` to `AjaxAngularAdapter`
 
 ### 0.3.5 December 1, 2016 ###
 
@@ -33,7 +40,7 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 ### 0.3.0 August 24, 2016 ###
 
 #### Breaking Changes ####
-- The Breeze Angular2 bridge is no longer an injectable service. It has been changed to an NgModule
+- The Breeze Angular bridge is no longer an injectable service. It has been changed to an NgModule
 
 # Prerequisites #
 
@@ -46,44 +53,44 @@ A bridge that configures Breeze to work with Angular 2 out of the box.
 
 	`npm install breeze-client --save`
 
-2. Install breeze-bridge-angular2
+2. Install breeze-bridge-angular
 
-	`npm install breeze-bridge-angular2 --save`
+	`npm install breeze-bridge-angular --save`
 
 # Usage #
 
-A comprehensive example app that makes use of the bridge can be found here: [https://github.com/Breeze/temphire.angular2](https://github.com/Breeze/temphire.angular2).
+A comprehensive example app that makes use of the bridge can be found here: [https://github.com/Breeze/temphire.angular](https://github.com/Breeze/temphire.angular).
 
 To use the bridge in your own application, the following steps are required.
 
-Configure `breeze-client` and `breeze-bridge-angular2` in `systemjs.config.js`.
+Configure `breeze-client` and `breeze-bridge-angular` in `systemjs.config.js`.
 
 ```
   // map tells the System loader where to look for things
   var map = {
     ...
     'breeze-client':              'node_modules/breeze-client',
-    'breeze-bridge-angular2':     'node_modules/breeze-bridge-angular2'
+    'breeze-bridge-angular':     'node_modules/breeze-bridge-angular'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     ...
     'breeze-client':              { main: 'breeze.debug.js', defaultExtension: 'js'},
-    'breeze-bridge-angular2':     { main: 'index.js', defaultExtension: 'js'}
+    'breeze-bridge-angular':     { main: 'index.js', defaultExtension: 'js'}
   };
 ```
 
-Import `BreezeBridgeAngular2Module` and add it to the app module's imports.
+Import `BreezeBridgeAngularModule` and add it to the app module's imports.
 
 ```
-import { BreezeBridgeAngular2Module } from 'breeze-bridge-angular2';
+import { BreezeBridgeAngularModule } from 'breeze-bridge-angular';
 ```
 
 ```
 @NgModule({
     imports: [
-        BreezeBridgeAngular2Module
+        BreezeBridgeAngularModule
     ],
     bootstrap: [ AppComponent ]
 })

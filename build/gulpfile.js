@@ -23,7 +23,7 @@ gulp.task('build', ['clean'],
 );
 
 gulp.task('moveFiles', ['build'], function() {
-  return gulp.src( mapPath(srcDir, ['breeze-bridge-angular2.js', 'breeze-bridge-angular2.d.ts', 'breeze-bridge-angular2.metadata.json']))
+  return gulp.src( mapPath(srcDir, ['breeze-bridge-angular.js', 'breeze-bridge-angular.d.ts', 'breeze-bridge-angular.metadata.json']))
     .pipe(rename(function(path) {
       var name = path.basename;
       path.basename = 'index' + (name.indexOf('.') < 0 ? '' : name.substring(name.indexOf('.')));

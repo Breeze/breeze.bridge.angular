@@ -6,7 +6,7 @@
  /* tslint:disable */
 
 import * as import0 from '@angular/core/src/linker/ng_module_factory';
-import * as import1 from './breeze-bridge-angular2';
+import * as import1 from './breeze-bridge-angular';
 import * as import2 from '@angular/http/src/http_module';
 import * as import3 from '@angular/http/src/backends/browser_xhr';
 import * as import4 from '@angular/http/src/base_response_options';
@@ -15,7 +15,7 @@ import * as import6 from '@angular/http/src/base_request_options';
 import * as import7 from '@angular/core/src/di/injector';
 import * as import8 from '@angular/http/src/interfaces';
 import * as import9 from '@angular/http/src/http';
-class BreezeBridgeAngular2ModuleInjector extends import0.NgModuleInjector<import1.BreezeBridgeAngular2Module> {
+class BreezeBridgeAngularModuleInjector extends import0.NgModuleInjector<import1.BreezeBridgeAngularModule> {
   _HttpModule_0:import2.HttpModule;
   _BrowserXhr_1:import3.BrowserXhr;
   _ResponseOptions_2:import4.BaseResponseOptions;
@@ -23,11 +23,11 @@ class BreezeBridgeAngular2ModuleInjector extends import0.NgModuleInjector<import
   _XHRBackend_4:import5.XHRBackend;
   _RequestOptions_5:import6.BaseRequestOptions;
   _Http_6:any;
-  _BreezeBridgeAngular2Module_7:import1.BreezeBridgeAngular2Module;
+  _BreezeBridgeAngularModule_7:import1.BreezeBridgeAngularModule;
   constructor(parent:import7.Injector) {
     super(parent,([] as any[]),([] as any[]));
   }
-  createInternal():import1.BreezeBridgeAngular2Module {
+  createInternal():import1.BreezeBridgeAngularModule {
     this._HttpModule_0 = new import2.HttpModule();
     this._BrowserXhr_1 = new import3.BrowserXhr();
     this._ResponseOptions_2 = new import4.BaseResponseOptions();
@@ -35,8 +35,8 @@ class BreezeBridgeAngular2ModuleInjector extends import0.NgModuleInjector<import
     this._XHRBackend_4 = new import5.XHRBackend(this._BrowserXhr_1,this._ResponseOptions_2,this._XSRFStrategy_3);
     this._RequestOptions_5 = new import6.BaseRequestOptions();
     this._Http_6 = import2.httpFactory(this._XHRBackend_4,this._RequestOptions_5);
-    this._BreezeBridgeAngular2Module_7 = new import1.BreezeBridgeAngular2Module(this._Http_6);
-    return this._BreezeBridgeAngular2Module_7;
+    this._BreezeBridgeAngularModule_7 = new import1.BreezeBridgeAngularModule(this._Http_6);
+    return this._BreezeBridgeAngularModule_7;
   }
   getInternal(token:any,notFoundResult:any):any {
     if ((token === import2.HttpModule)) { return this._HttpModule_0; }
@@ -46,10 +46,10 @@ class BreezeBridgeAngular2ModuleInjector extends import0.NgModuleInjector<import
     if ((token === import5.XHRBackend)) { return this._XHRBackend_4; }
     if ((token === import6.RequestOptions)) { return this._RequestOptions_5; }
     if ((token === import9.Http)) { return this._Http_6; }
-    if ((token === import1.BreezeBridgeAngular2Module)) { return this._BreezeBridgeAngular2Module_7; }
+    if ((token === import1.BreezeBridgeAngularModule)) { return this._BreezeBridgeAngularModule_7; }
     return notFoundResult;
   }
   destroyInternal():void {
   }
 }
-export const BreezeBridgeAngular2ModuleNgFactory:import0.NgModuleFactory<import1.BreezeBridgeAngular2Module> = new import0.NgModuleFactory(BreezeBridgeAngular2ModuleInjector,import1.BreezeBridgeAngular2Module);
+export const BreezeBridgeAngularModuleNgFactory:import0.NgModuleFactory<import1.BreezeBridgeAngularModule> = new import0.NgModuleFactory(BreezeBridgeAngularModuleInjector,import1.BreezeBridgeAngularModule);

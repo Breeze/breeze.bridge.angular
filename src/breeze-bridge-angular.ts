@@ -8,15 +8,15 @@ import 'rxjs/add/operator/toPromise';
 @NgModule({
   imports: [HttpModule]
 })
-export class BreezeBridgeAngular2Module {
+export class BreezeBridgeAngularModule {
   constructor(public http: Http) {
     // Configure Breeze for Angular ... exactly once.
     // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
     // 'backingStore' is the Breeze default but we set it here to be explicit.
     config.initializeAdapterInstance('modelLibrary', 'backingStore', true);
-    config.setQ(<promises.IPromiseService> Q);
-    config.registerAdapter('ajax', () => new AjaxAngular2Adapter(http));
-    config.initializeAdapterInstance('ajax', AjaxAngular2Adapter.adapterName, true);
+    config.setQ(<any>Q);
+    config.registerAdapter('ajax', () => new AjaxAngularAdapter(http));
+    config.initializeAdapterInstance('ajax', AjaxAngularAdapter.adapterName, true);
   }
 }
 
@@ -92,9 +92,9 @@ export interface DsaConfig {
 }
 
 ////////////////////
-export class AjaxAngular2Adapter {
-  static adapterName = 'angular2';
-  name = AjaxAngular2Adapter.adapterName;
+export class AjaxAngularAdapter {
+  static adapterName = 'angular';
+  name = AjaxAngularAdapter.adapterName;
   defaultSettings = {};
   requestInterceptor: (info: { }) => {};
 

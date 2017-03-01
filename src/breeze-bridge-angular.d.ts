@@ -1,7 +1,7 @@
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-export declare class BreezeBridgeAngular2Module {
+export declare class BreezeBridgeAngularModule {
     http: Http;
     constructor(http: Http);
 }
@@ -32,7 +32,7 @@ export interface DsaConfig {
     success: (res: HttpResponse) => HttpResponse;
     error: (res: (HttpResponse | Error)) => HttpResponse;
 }
-export declare class AjaxAngular2Adapter {
+export declare class AjaxAngularAdapter {
     http: Http;
     static adapterName: string;
     name: string;

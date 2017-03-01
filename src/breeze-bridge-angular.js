@@ -4,29 +4,29 @@ var http_1 = require('@angular/http');
 var breeze_client_1 = require('breeze-client');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/toPromise');
-var BreezeBridgeAngular2Module = (function () {
-    function BreezeBridgeAngular2Module(http) {
+var BreezeBridgeAngularModule = (function () {
+    function BreezeBridgeAngularModule(http) {
         this.http = http;
         // Configure Breeze for Angular ... exactly once.
         // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
         // 'backingStore' is the Breeze default but we set it here to be explicit.
         breeze_client_1.config.initializeAdapterInstance('modelLibrary', 'backingStore', true);
         breeze_client_1.config.setQ(Q);
-        breeze_client_1.config.registerAdapter('ajax', function () { return new AjaxAngular2Adapter(http); });
-        breeze_client_1.config.initializeAdapterInstance('ajax', AjaxAngular2Adapter.adapterName, true);
+        breeze_client_1.config.registerAdapter('ajax', function () { return new AjaxAngularAdapter(http); });
+        breeze_client_1.config.initializeAdapterInstance('ajax', AjaxAngularAdapter.adapterName, true);
     }
-    BreezeBridgeAngular2Module.decorators = [
+    BreezeBridgeAngularModule.decorators = [
         { type: core_1.NgModule, args: [{
                     imports: [http_1.HttpModule]
                 },] },
     ];
     /** @nocollapse */
-    BreezeBridgeAngular2Module.ctorParameters = [
+    BreezeBridgeAngularModule.ctorParameters = function () { return [
         { type: http_1.Http, },
-    ];
-    return BreezeBridgeAngular2Module;
+    ]; };
+    return BreezeBridgeAngularModule;
 }());
-exports.BreezeBridgeAngular2Module = BreezeBridgeAngular2Module;
+exports.BreezeBridgeAngularModule = BreezeBridgeAngularModule;
 /**
  * Minimum for breeze breeze Q/ES6 Promise adapter
  */
@@ -57,14 +57,14 @@ var Q = {
 };
 ;
 ////////////////////
-var AjaxAngular2Adapter = (function () {
-    function AjaxAngular2Adapter(http) {
+var AjaxAngularAdapter = (function () {
+    function AjaxAngularAdapter(http) {
         this.http = http;
-        this.name = AjaxAngular2Adapter.adapterName;
+        this.name = AjaxAngularAdapter.adapterName;
         this.defaultSettings = {};
     }
-    AjaxAngular2Adapter.prototype.initialize = function () { };
-    AjaxAngular2Adapter.prototype.ajax = function (config) {
+    AjaxAngularAdapter.prototype.initialize = function () { };
+    AjaxAngularAdapter.prototype.ajax = function (config) {
         if (!this.http) {
             throw new Error('Unable to locate angular http module for ajax adapter');
         }
@@ -88,7 +88,7 @@ var AjaxAngular2Adapter = (function () {
         }
         var headers = new http_1.Headers(config.headers || {});
         if (!headers.has('Content-Type')) {
-            if (config.contentType !== false) {
+            if (config.type != 'GET' && config.type != 'DELETE' && config.contentType !== false) {
                 headers.set('Content-Type', config.contentType || 'application/json; charset=utf-8');
             }
         }
@@ -201,10 +201,10 @@ var AjaxAngular2Adapter = (function () {
         }
     };
     ;
-    AjaxAngular2Adapter.adapterName = 'angular2';
-    return AjaxAngular2Adapter;
+    AjaxAngularAdapter.adapterName = 'angular';
+    return AjaxAngularAdapter;
 }());
-exports.AjaxAngular2Adapter = AjaxAngular2Adapter;
+exports.AjaxAngularAdapter = AjaxAngularAdapter;
 ///// Helpers ////
 function encodeParams(obj) {
     var query = '';
@@ -250,4 +250,4 @@ function makeGetHeaders(res) {
     var headers = res.headers;
     return function getHeaders(headerName) { return headers.getAll(headerName); };
 }
-//# sourceMappingURL=breeze-bridge-angular2.js.map
+//# sourceMappingURL=breeze-bridge-angular.js.map
