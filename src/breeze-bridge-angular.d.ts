@@ -1,4 +1,5 @@
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
+import { HttpResponse } from 'breeze-client';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 export declare class BreezeBridgeAngularModule {
@@ -6,19 +7,7 @@ export declare class BreezeBridgeAngularModule {
     constructor(http: Http);
 }
 /**
- * Ajax http response abstraction expected by Breeze DataServiceAdapter
- */
-export interface HttpResponse {
-    config: {};
-    data: any;
-    getHeaders: (headerName?: string) => string[];
-    ngConfig: {};
-    status: number;
-    statusText: string;
-    response: Response;
-}
-/**
- * DataServiceAdapter Ajax request configuration\
+ * DataServiceAdapter Ajax request configuration
  */
 export interface DsaConfig {
     url: string;
@@ -29,8 +18,8 @@ export interface DsaConfig {
     headers?: {};
     data?: any;
     params?: {};
-    success: (res: HttpResponse) => HttpResponse;
-    error: (res: (HttpResponse | Error)) => HttpResponse;
+    success: (res: HttpResponse) => void;
+    error: (res: (HttpResponse | Error)) => void;
 }
 export declare class AjaxAngularAdapter {
     http: Http;
@@ -40,5 +29,5 @@ export declare class AjaxAngularAdapter {
     requestInterceptor: (info: {}) => {};
     constructor(http: Http);
     initialize(): void;
-    ajax(config: DsaConfig): Promise<void>;
+    ajax(config: DsaConfig): void;
 }

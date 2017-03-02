@@ -45,17 +45,16 @@ var Q = {
         };
     },
     resolve: function (value) {
-        var deferred = Q['defer']();
+        var deferred = Q.defer();
         deferred.resolve(value);
         return deferred.promise;
     },
     reject: function (reason) {
-        var deferred = Q['defer']();
+        var deferred = Q.defer();
         deferred.reject(reason);
         return deferred.promise;
     }
 };
-;
 ////////////////////
 var AjaxAngularAdapter = (function () {
     function AjaxAngularAdapter(http) {
@@ -120,14 +119,11 @@ var AjaxAngularAdapter = (function () {
             }
         }
         if (requestInfo.request) {
-            return this.http.request(requestInfo.request)
+            this.http.request(requestInfo.request)
                 .map(extractData)
                 .toPromise()
                 .then(requestInfo.success)
                 .catch(requestInfo.error);
-        }
-        else {
-            return Promise.resolve(null);
         }
         function extractData(response) {
             var data;
@@ -149,16 +145,16 @@ var AjaxAngularAdapter = (function () {
                 config: requestInfo.request,
                 data: arg.data,
                 getHeaders: makeGetHeaders(arg.response),
-                ngConfig: requestInfo.request,
-                status: arg.response.status,
-                statusText: arg.response.statusText,
-                response: arg.response
+                status: arg.response.status
             };
+            httpResponse['ngConfig'] = requestInfo.request;
+            httpResponse['statusText'] = arg.response.statusText;
+            httpResponse['response'] = arg.response;
             config.success(httpResponse);
         }
         function errorFn(arg) {
             if (arg instanceof Error) {
-                return Promise.reject(arg); // program error; nothing we can do
+                throw arg; // program error; nothing we can do
             }
             else {
                 var data;
@@ -191,11 +187,11 @@ var AjaxAngularAdapter = (function () {
                     config: requestInfo.request,
                     data: data,
                     getHeaders: makeGetHeaders(response),
-                    ngConfig: requestInfo.request,
-                    status: response.status,
-                    statusText: response.statusText,
-                    response: response
+                    status: response.status
                 };
+                httpResponse['ngConfig'] = requestInfo.request;
+                httpResponse['statusText'] = response.statusText;
+                httpResponse['response'] = response;
                 config.error(httpResponse); // send error to breeze error handler
             }
         }
@@ -248,6 +244,6 @@ function encodeParams(obj) {
 }
 function makeGetHeaders(res) {
     var headers = res.headers;
-    return function getHeaders(headerName) { return headers.getAll(headerName); };
+    return function getHeaders(headerName) { return headers.getAll(headerName).join('\r\n'); };
 }
 //# sourceMappingURL=breeze-bridge-angular.js.map

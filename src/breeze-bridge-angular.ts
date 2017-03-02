@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpModule, Http, Headers, Request, RequestOptions, Response } from '@angular/http';
-import { core, config, promises } from 'breeze-client';
+import { core, config, promises, HttpResponse } from 'breeze-client';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -14,27 +14,17 @@ export class BreezeBridgeAngularModule {
     // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
     // 'backingStore' is the Breeze default but we set it here to be explicit.
     config.initializeAdapterInstance('modelLibrary', 'backingStore', true);
-    config.setQ(<any>Q);
+    config.setQ(Q);
     config.registerAdapter('ajax', () => new AjaxAngularAdapter(http));
     config.initializeAdapterInstance('ajax', AjaxAngularAdapter.adapterName, true);
   }
 }
 
 /**
- * Minimum necessary deferred object for breeze Q/ES6 Promise adapter
- * Makes ES6 promise look like Q.
- */
-interface Deferred {
-    promise: Promise<any>;
-    resolve: (value?: {} | PromiseLike<{}>) => void;
-    reject: (reason?: any) => void;
-}
-
-/**
  * Minimum for breeze breeze Q/ES6 Promise adapter
  */
-var Q = {
-    defer(): Deferred {
+var Q: promises.IPromiseService = {
+    defer(): promises.IDeferred<{}> {
         let resolve: (value?: {} | PromiseLike<{}>) => void;
         let reject: (reason?: any) => void;
         let promise = new Promise((_resolve, _reject) => {
@@ -42,41 +32,28 @@ var Q = {
             reject = _reject;
         });
         return {
-            promise: promise,
+            promise: <any>promise,   // TODO: Current promises.IPromise shape is incompatible with Promise
             resolve(value: any) { resolve(value); },
             reject(reason: any) { reject(reason); }
         };
     },
 
     resolve(value?: {} | PromiseLike<{}>) {
-        let deferred: Deferred = Q['defer']();
+        let deferred = Q.defer();
         deferred.resolve(value);
         return deferred.promise;
     },
 
 
     reject(reason?: any) {
-        let deferred: Deferred = Q['defer']();
+        let deferred = Q.defer();
         deferred.reject(reason);
         return deferred.promise;
     }
 };
 
 /**
- * Ajax http response abstraction expected by Breeze DataServiceAdapter
- */
-export interface HttpResponse {
-  config: {};
-  data: any;
-  getHeaders: (headerName?: string) => string[];
-  ngConfig: {};
-  status: number;
-  statusText: string;
-  response: Response;
-};
-
-/**
- * DataServiceAdapter Ajax request configuration\
+ * DataServiceAdapter Ajax request configuration
  */
 export interface DsaConfig {
   url: string;
@@ -87,8 +64,8 @@ export interface DsaConfig {
   headers?: { };
   data?: any;
   params?: { };
-  success: (res: HttpResponse) => HttpResponse;
-  error: (res: (HttpResponse | Error)) => HttpResponse;
+  success: (res: HttpResponse) => void;
+  error: (res: (HttpResponse | Error)) => void;
 }
 
 ////////////////////
@@ -168,13 +145,11 @@ export class AjaxAngularAdapter {
     }
 
     if (requestInfo.request) { // exists unless requestInterceptor killed it.
-      return this.http.request(requestInfo.request)
+      this.http.request(requestInfo.request)
         .map(extractData)
         .toPromise()
         .then(requestInfo.success)
         .catch(requestInfo.error);
-    } else {
-      return Promise.resolve(null);
     }
 
     function extractData(response: Response) {
@@ -198,17 +173,17 @@ export class AjaxAngularAdapter {
         config: requestInfo.request,
         data: arg.data,
         getHeaders: makeGetHeaders(arg.response),
-        ngConfig: requestInfo.request,
-        status: arg.response.status,
-        statusText: arg.response.statusText,
-        response: arg.response
+        status: arg.response.status
       };
+      httpResponse['ngConfig'] = requestInfo.request;
+      httpResponse['statusText'] = arg.response.statusText;
+      httpResponse['response'] = arg.response;
       config.success(httpResponse);
     }
 
     function errorFn(arg: {data: any, response: Response} | Error | Response) {
       if (arg instanceof Error) {
-        return Promise.reject(arg); // program error; nothing we can do
+        throw arg; // program error; nothing we can do
       } else {
         var data: any;
         var response: Response;
@@ -240,11 +215,11 @@ export class AjaxAngularAdapter {
           config: requestInfo.request,
           data: data,
           getHeaders: makeGetHeaders(response),
-          ngConfig: requestInfo.request,
-          status: response.status,
-          statusText: response.statusText,
-          response: response
+          status: response.status
         };
+        httpResponse['ngConfig'] = requestInfo.request;
+        httpResponse['statusText'] = response.statusText;
+        httpResponse['response'] = response;
 
         config.error(httpResponse); // send error to breeze error handler
       }
@@ -296,5 +271,5 @@ function encodeParams(obj: { }) {
 
 function makeGetHeaders(res: Response) {
       let headers = res.headers;
-    return function getHeaders(headerName?: string) { return headers.getAll(headerName); };
+    return function getHeaders(headerName?: string) { return headers.getAll(headerName).join('\r\n'); };
 }
