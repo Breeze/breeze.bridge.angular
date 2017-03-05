@@ -4,6 +4,11 @@ A bridge that configures Breeze to work with Angular out of the box.
 
 # Change Log #
 
+### 2.4.2 March 5, 2017 ###
+
+#### Features ####
+- Update to breeze-client 1.6.3
+
 ### 2.4.1 March 1, 2017 ###
 
 #### Breaking Changes ####

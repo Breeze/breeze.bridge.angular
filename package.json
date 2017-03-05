@@ -1,8 +1,9 @@
 {
   "name": "breeze-bridge-angular",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "A bridge that configures Breeze and Angular to work together.",
   "main": "index.js",
+  "types": "index.d.ts",
   "keywords": [
     "breeze",
     "angular",
@@ -14,7 +15,7 @@
     "@angular/compiler": "~2.4.0",
     "@angular/core": "~2.4.0",
     "@angular/http": "~2.4.0",
-    "breeze-client": "~1.6.2",
+    "breeze-client": "^1.6.3",
     "rxjs": "5.0.1",
     "zone.js": "^0.7.7"
   },

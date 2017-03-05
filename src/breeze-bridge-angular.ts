@@ -32,7 +32,7 @@ var Q: promises.IPromiseService = {
             reject = _reject;
         });
         return {
-            promise: <any>promise,   // TODO: Current promises.IPromise shape is incompatible with Promise
+            promise: promise, 
             resolve(value: any) { resolve(value); },
             reject(reason: any) { reject(reason); }
         };
