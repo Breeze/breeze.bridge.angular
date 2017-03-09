@@ -112,22 +112,22 @@ import { Customer } from './entities';
 @Injectable()
 export class DataService {
 
-  private _em: EntityManager;
+    private _em: EntityManager;
 
-  constructor() {
-    this._em = new EntityManager();
-  }
+    constructor() {
+        this._em = new EntityManager();
+    }
 
-  getAllCustomers(): Promise<Customer[]> {
-    let query = EntityQuery.from('Customers').orderBy('companyName');
+    getAllCustomers(): Promise<Customer[]> {
+        let query = EntityQuery.from('Customers').orderBy('companyName');
 
-    return <Promise<Customer[]>><any> this._em.executeQuery(query)
-    .then(res => res.results)
-    .catch((error) => {
-      console.log(error);
-      return Promise.reject(error);
-    });
-  }
+        return this._em.executeQuery(query)
+            .then(res => res.results)
+            .catch((error) => {
+                console.log(error);
+                return Promise.reject(error);
+            });
+    }
 }
 ```
 
