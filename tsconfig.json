@@ -11,5 +11,8 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "declaration": true
+  },
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
   }
 }

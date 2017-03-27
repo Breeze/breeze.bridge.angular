@@ -1,9 +1,10 @@
 "use strict";
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var breeze_client_1 = require('breeze-client');
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/toPromise');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var breeze_client_1 = require("breeze-client");
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/toPromise");
 var BreezeBridgeAngularModule = (function () {
     function BreezeBridgeAngularModule(http) {
         this.http = http;
@@ -15,17 +16,17 @@ var BreezeBridgeAngularModule = (function () {
         breeze_client_1.config.registerAdapter('ajax', function () { return new AjaxAngularAdapter(http); });
         breeze_client_1.config.initializeAdapterInstance('ajax', AjaxAngularAdapter.adapterName, true);
     }
-    BreezeBridgeAngularModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [http_1.HttpModule]
-                },] },
-    ];
-    /** @nocollapse */
-    BreezeBridgeAngularModule.ctorParameters = function () { return [
-        { type: http_1.Http, },
-    ]; };
     return BreezeBridgeAngularModule;
 }());
+BreezeBridgeAngularModule.decorators = [
+    { type: core_1.NgModule, args: [{
+                imports: [http_1.HttpModule]
+            },] },
+];
+/** @nocollapse */
+BreezeBridgeAngularModule.ctorParameters = function () { return [
+    { type: http_1.Http, },
+]; };
 exports.BreezeBridgeAngularModule = BreezeBridgeAngularModule;
 /**
  * Minimum for breeze breeze Q/ES6 Promise adapter
@@ -197,9 +198,9 @@ var AjaxAngularAdapter = (function () {
         }
     };
     ;
-    AjaxAngularAdapter.adapterName = 'angular';
     return AjaxAngularAdapter;
 }());
+AjaxAngularAdapter.adapterName = 'angular';
 exports.AjaxAngularAdapter = AjaxAngularAdapter;
 ///// Helpers ////
 function encodeParams(obj) {
