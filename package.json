@@ -1,6 +1,6 @@
 {
   "name": "breeze-bridge-angular",
-  "version": "4.0.0-alpha1",
+  "version": "4.0.0",
   "description": "A bridge that configures Breeze and Angular to work together.",
   "main": "index.js",
   "types": "index.d.ts",
