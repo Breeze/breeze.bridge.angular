@@ -2,7 +2,14 @@
 
 A bridge that configures Breeze to work with Angular out of the box.
 
+This package is effectively obsolete. For Angular 4.3 and up it is recommended to use the new HttpClient service. An updated bridge which uses the HttpClient can be found [here](https://github.com/Breeze/breeze.bridge.ngx.http.client).
+
 # Change Log #
+
+### 4.0.2 November 19, 2017 ###
+
+#### Features ####
+- Restructed package and minor code tweaks
 
 ### 4.0.0 April 19, 2017 ###
 
@@ -54,7 +61,7 @@ A bridge that configures Breeze to work with Angular out of the box.
 
 # Prerequisites #
 
-- Breeze client npm package 1.5.12 or higher
+- Breeze client npm package 1.6.3 or higher
 - Angular 2.0.0 or higher
 
 # Installation #
@@ -73,34 +80,18 @@ A comprehensive example app that makes use of the bridge can be found here: [htt
 
 To use the bridge in your own application, the following steps are required.
 
-Configure `breeze-client` and `breeze-bridge-angular` in `systemjs.config.js`.
-
-```
-  // map tells the System loader where to look for things
-  var map = {
-    ...
-    'breeze-client':              'node_modules/breeze-client',
-    'breeze-bridge-angular':     'node_modules/breeze-bridge-angular'
-  };
-
-  // packages tells the System loader how to load when no filename and/or no extension
-  var packages = {
-    ...
-    'breeze-client':              { main: 'breeze.debug.js', defaultExtension: 'js'},
-    'breeze-bridge-angular':     { main: 'index.js', defaultExtension: 'js'}
-  };
-```
-
-Import `BreezeBridgeAngularModule` and add it to the app module's imports.
+Import `BreezeBridgeAngularModule` and `HttpModule` and add it to the app module's imports.
 
 ```
 import { BreezeBridgeAngularModule } from 'breeze-bridge-angular';
+import { Http } from '@angular/http';
 ```
 
 ```
 @NgModule({
     imports: [
-        BreezeBridgeAngularModule
+        BreezeBridgeAngularModule,
+        HttpModule
     ],
     bootstrap: [ AppComponent ]
 })
@@ -134,34 +125,4 @@ export class DataService {
             });
     }
 }
-```
-
-Notice that we are also importing `breeze-client` instead of loading it as a static script as you might have seen in other examples. Make sure you don't have an extra script tag in your `index.html` that attempts to statically load `breeze.debug.js` or similar.
-
-Example `index.html`:
-```
-<html>
-  <head>
-    <title>Angular 2 QuickStart</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
-  </head>
-
-  <body>
-    <my-app>Loading...</my-app>
-  </body>
-</html>
 ```

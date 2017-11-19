@@ -1,0 +1,32 @@
+{
+  "name": "breeze-bridge-angular",
+  "version": "4.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Breeze/breeze.bridge.angular"
+  },
+  "author": {
+    "name": "Marcel Good",
+    "email": "marcelg@ideablade.com"
+  },
+  "keywords": [
+    "breeze",
+    "angular",
+    "bridge"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Breeze/breeze.bridge.angular/issues"
+  },
+  "main": "breeze-bridge-angular.umd.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "typings": "breeze-bridge-angular.d.ts",
+  "peerDependencies": {
+    "@angular/core": ">= 2.0.0",
+    "@angular/http": ">= 2.0.0",
+    "rxjs": ">= 5.1.0",
+    "zone.js": ">= 0.8.4",
+    "breeze-client": ">= 1.6.3"
+  }
+}

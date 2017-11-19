@@ -1,26 +1,35 @@
-*.svn
-*.idea
-*.user
-*.docx
-*.vs
-*.vsmdi
-*.cmd
-*.testsettings
-*.old
-*.suo
-grunt.deprecated/docs
-*.map
+# Node
+node_modules/*
+npm-debug.log
 
-node_modules
-bin
-obj
-packages
-_temp
-Unused
-TestResults
-_ReSharper*
+# TypeScript
+src/*.js
+src/*.map
+src/*.d.ts
 
-GetFtpCredential.ps1
+# JetBrains
+.idea
+.project
+.settings
+.idea/*
+*.iml
 
-breeze-*.zip
-breeze*.nupkg
+# VS Code
+.vscode/*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Ngc generated files
+**/*.ngfactory.ts
+
+# Build files
+dist/*
+
+# Playground tmp files
+.playground
