@@ -2,7 +2,7 @@
 
 A bridge that configures Breeze to work with Angular out of the box.
 
-This package is effectively obsolete. For Angular 4.3 and up it is recommended to use the new HttpClient service. An updated bridge which uses the HttpClient can be found [here](https://github.com/Breeze/breeze.bridge.ngx.http.client).
+This package is effectively obsolete. For Angular 4.3 and up it is recommended to use the new HttpClient service. An updated bridge which uses the HttpClient can be found [here](https://github.com/Breeze/breeze.bridge2.angular).
 
 # Change Log #
 

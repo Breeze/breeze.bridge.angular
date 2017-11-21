@@ -1,26 +1,9 @@
-import { NgModule } from '@angular/core';
 import { Http, Headers, Request, RequestOptions, Response } from '@angular/http';
-import { core, config, promises, HttpResponse } from 'breeze-client';
+import { core, HttpResponse } from "breeze-client";
+import { map } from "rxjs/operators/map";
 
-import { map } from 'rxjs/operators/map';
-import 'rxjs/add/operator/toPromise';
+import { DsaConfig } from "./common";
 
-import { Q, DsaConfig } from './common';
-
-@NgModule()
-export class BreezeBridgeAngularModule {
-    constructor(public http: Http) {
-        // Configure Breeze for Angular ... exactly once.
-        // config breeze to use the native 'backingStore' modeling adapter appropriate for Ng
-        // 'backingStore' is the Breeze default but we set it here to be explicit.
-        config.initializeAdapterInstance('modelLibrary', 'backingStore', true);
-        config.setQ(Q);
-        config.registerAdapter('ajax', () => new AjaxAngularAdapter(http));
-        config.initializeAdapterInstance('ajax', AjaxAngularAdapter.adapterName, true);
-    }
-}
-
-////////////////////
 export class AjaxAngularAdapter {
     static adapterName = 'angular';
     name = AjaxAngularAdapter.adapterName;
@@ -100,8 +83,7 @@ export class AjaxAngularAdapter {
             const fmap = map(extractData);
 
             fmap(this.http.request(requestInfo.request))
-                .toPromise()
-                .then(requestInfo.success)
+                .forEach(requestInfo.success)
                 .catch(requestInfo.error);
         }
 
