@@ -6,7 +6,7 @@ This package is effectively obsolete. For Angular 4.3 and up it is recommended t
 
 # Change Log #
 
-### 4.0.2 TBD ###
+### 4.0.2 November 20, 2017 ###
 
 #### Features ####
 - Restructed package and minor code tweaks
